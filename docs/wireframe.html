@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEIC 990 Trainer — ワイヤーフレーム</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f3;
+      color: #1a1a1a;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .meta {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 2rem;
+    }
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .screen {
+      background: #e8e8e5;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .screen-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #666;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .phone {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .ph-bar {
+      background: #f5f5f3;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ph-bar-title { font-size: 12px; font-weight: 500; }
+    .ph-bar-sub { font-size: 11px; color: #999; }
+    .ph-body { padding: 12px; }
+    .wf-block {
+      background: #f5f5f3;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      padding: 8px 10px;
+    }
+    .wf-label { font-size: 10px; color: #999; margin-bottom: 4px; }
+    .wf-title { font-size: 12px; font-weight: 500; }
+    .wf-row { display: flex; gap: 6px; margin-bottom: 8px; }
+    .wf-btn {
+      flex: 1;
+      border-radius: 6px;
+      padding: 8px 4px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: default;
+    }
+    .wf-btn-danger  { background: #fde8e8; color: #7a1f1f; }
+    .wf-btn-success { background: #e8f3de; color: #275010; }
+    .wf-btn-primary { background: #eeedfe; color: #3c3489; }
+    .wf-btn-neutral { background: #f0f0ee; color: #666; border: 1px solid #ddd; }
+    .wf-card-flip {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 10px;
+      text-align: center;
+      margin-bottom: 8px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-word { font-size: 18px; font-weight: 500; }
+    .wf-pos  { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .wf-hint { font-size: 10px; color: #bbb; margin-top: 8px; }
+    .wf-progress-bar {
+      height: 4px;
+      background: #eee;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .wf-progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: #534ab7;
+      width: 35%;
+    }
+    .wf-stat-row { display: flex; gap: 6px; margin-bottom: 8px; }
+    .wf-stat {
+      flex: 1;
+      background: #f5f5f3;
+      border-radius: 6px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .wf-stat-num { font-size: 16px; font-weight: 500; }
+    .wf-stat-lbl { font-size: 10px; color: #999; }
+    .wf-badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .wf-badge-new    { background: #e6f1fb; color: #0c447c; }
+    .wf-badge-learn  { background: #faeeda; color: #633806; }
+    .wf-badge-master { background: #eaf3de; color: #27500a; }
+    .wf-input {
+      background: #f5f5f3;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wf-input-text { font-size: 11px; color: #bbb; }
+    .wf-table-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0ee;
+    }
+    .wf-table-word { font-size: 11px; font-weight: 500; flex: 2; }
+    .wf-table-mean { font-size: 10px; color: #666; flex: 3; }
+    .wf-result-score { text-align: center; padding: 12px; }
+    .wf-result-num { font-size: 32px; font-weight: 500; color: #534ab7; }
+    .wf-result-lbl { font-size: 11px; color: #aaa; }
+    .badge-row { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+    .legend {
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e5e5e5;
+    }
+    .legend h2 { font-size: 13px; font-weight: 500; margin-bottom: 10px; color: #444; }
+    .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; }
+    .legend-item { font-size: 12px; color: #666; display: flex; align-items: center; gap: 6px; }
+  </style>
+</head>
+<body>
+
+  <h1>TOEIC 990 Trainer — 画面設計（ワイヤーフレーム）</h1>
+  <p class="meta">バージョン 1.0 ／ 作成日: 2026-05-30 ／ 対象: v1 MVP</p>
+
+  <div class="screens-grid">
+
+    <!-- SCR-01 ホーム -->
+    <div class="screen">
+      <div class="screen-label">SCR-01 ホーム画面</div>
+      <div class="phone">
+        <div class="ph-bar">
+          <span class="ph-bar-title">TOEIC 990 Trainer</span>
+          <span style="font-size:16px;color:#aaa;">⚙</span>
+        </div>
+        <div class="ph-body">
+          <div class="wf-stat-row">
+            <div class="wf-stat"><div class="wf-stat-num">8</div><div class="wf-stat-lbl">今日学習</div></div>
+            <div class="wf-stat"><div class="wf-stat-num">20</div><div class="wf-stat-lbl">目標</div></div>
+            <div class="wf-stat"><div class="wf-stat-num">52</div><div class="wf-stat-lbl">総登録</div></div>
+          </div>
+          <div class="wf-block">
+            <div class="wf-label">ステータス内訳</div>
+            <div class="badge-row">
+              <span class="wf-badge wf-badge-new">new 30</span>
+              <span class="wf-badge wf-badge-learn">学習中 18</span>
+              <span class="wf-badge wf-badge-master">習得 4</span>
+            </div>
+          </div>
+          <div class="wf-btn wf-btn-primary" style="margin-bottom:6px;">学習スタート</div>
+          <div class="wf-btn wf-btn-neutral">単語を管理</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCR-02 学習画面 -->
+    <div class="screen">
+      <div class="screen-label">SCR-02 学習画面（カード）</div>
+      <div class="phone">
+        <div class="ph-bar">
+          <span style="font-size:14px;color:#aaa;">←</span>
+          <span class="ph-bar-sub">12 / 34</span>
+          <span style="font-size:14px;color:#aaa;">···</span>
+        </div>
+        <div class="ph-body">
+          <div class="wf-progress-bar"><div class="wf-progress-fill"></div></div>
+          <div class="wf-card-flip">
+            <div class="wf-word">allocate</div>
+            <div class="wf-pos">v.</div>
+            <div class="wf-hint">タップして意味を確認</div>
+          </div>
+          <div style="font-size:10px;color:#bbb;text-align:center;margin-bottom:8px;">← キー／→ キーでも操作可</div>
+          <div class="wf-row">
+            <div class="wf-btn wf-btn-danger">↩ もう一度</div>
+            <div class="wf-btn wf-btn-success">✓ 覚えた！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCR-03 完了画面 -->
+    <div class="screen">
+      <div class="screen-label">SCR-03 セッション完了</div>
+      <div class="phone">
+        <div class="ph-bar">
+          <span class="ph-bar-title">結果</span>
+        </div>
+        <div class="ph-body">
+          <div class="wf-result-score">
+            <div class="wf-result-num">85%</div>
+            <div class="wf-result-lbl">正解率</div>
+          </div>
+          <div class="wf-stat-row">
+            <div class="wf-stat"><div class="wf-stat-num">20</div><div class="wf-stat-lbl">学習枚数</div></div>
+            <div class="wf-stat"><div class="wf-stat-num">17</div><div class="wf-stat-lbl">覚えた</div></div>
+            <div class="wf-stat"><div class="wf-stat-num">3</div><div class="wf-stat-lbl">苦手</div></div>
+          </div>
+          <div class="wf-btn wf-btn-danger" style="margin-bottom:6px;">苦手のみもう一度</div>
+          <div class="wf-btn wf-btn-neutral">ホームへ戻る</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCR-04 管理画面 -->
+    <div class="screen">
+      <div class="screen-label">SCR-04 単語管理画面</div>
+      <div class="phone">
+        <div class="ph-bar">
+          <span class="ph-bar-title">単語を管理</span>
+          <span class="wf-badge wf-badge-new" style="font-size:11px;padding:3px 8px;">＋ 追加</span>
+        </div>
+        <div class="ph-body">
+          <div class="wf-input">
+            <span style="font-size:13px;color:#bbb;">🔍</span>
+            <span class="wf-input-text">単語・意味で検索</span>
+          </div>
+          <div class="wf-table-row">
+            <span class="wf-table-word">allocate</span>
+            <span class="wf-table-mean">〜を割り当てる</span>
+            <span class="wf-badge wf-badge-learn">学習中</span>
+          </div>
+          <div class="wf-table-row">
+            <span class="wf-table-word">in conjunction</span>
+            <span class="wf-table-mean">〜と連携して</span>
+            <span class="wf-badge wf-badge-new">new</span>
+          </div>
+          <div class="wf-table-row">
+            <span class="wf-table-word">prominent</span>
+            <span class="wf-table-mean">著名な、目立つ</span>
+            <span class="wf-badge wf-badge-master">習得</span>
+          </div>
+          <div style="font-size:10px;color:#bbb;text-align:center;margin-top:10px;">行をタップで編集・削除</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <h2>凡例・補足</h2>
+    <div class="legend-grid">
+      <div class="legend-item"><span class="wf-badge wf-badge-new">new</span> 未学習の単語</div>
+      <div class="legend-item"><span class="wf-badge wf-badge-learn">学習中</span> 1回以上学習済み</div>
+      <div class="legend-item"><span class="wf-badge wf-badge-master">習得</span> 3回連続正解</div>
+      <div class="legend-item">カードはタップ／クリックで表裏切り替え</div>
+      <div class="legend-item">← → キーで「もう一度」「覚えた」操作可</div>
+      <div class="legend-item">データはlocalStorageに自動保存</div>
+    </div>
+  </div>
+
+</body>
+</html>
