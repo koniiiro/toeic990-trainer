@@ -86,3 +86,16 @@ function getSettings() {
 function saveSettings(settings) {
   localStorage.setItem(KEYS.SETTINGS, JSON.stringify(settings));
 }
+
+
+// ───────────────────────────────
+// 発音（Web Speech API）
+// ───────────────────────────────
+
+// 単語を読み上げる
+function speakWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang  = 'en-US';
+  utterance.rate  = 0.9;  // 少しゆっくり読む（1.0が標準）
+  speechSynthesis.speak(utterance);
+}
