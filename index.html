@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEIC 990 Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <h1 class="header__title">TOEIC 990 Trainer</h1>
+    <button class="header__settings" aria-label="設定">⚙</button>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- 進捗サマリー -->
+    <section class="stats" aria-label="本日の進捗">
+      <div class="stats__item">
+        <span class="stats__num" id="studied-count">0</span>
+        <span class="stats__label">今日学習</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num" id="goal-count">20</span>
+        <span class="stats__label">目標</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num" id="total-count">0</span>
+        <span class="stats__label">総登録</span>
+      </div>
+    </section>
+
+    <!-- ステータス内訳 -->
+    <section class="status-badges" aria-label="ステータス内訳">
+      <span class="badge badge--new">new <span id="new-count">0</span></span>
+      <span class="badge badge--learning">学習中 <span id="learning-count">0</span></span>
+      <span class="badge badge--mastered">習得 <span id="mastered-count">0</span></span>
+    </section>
+
+    <!-- アクションボタン -->
+    <div class="actions">
+      <button class="btn btn--primary" id="start-btn">学習スタート</button>
+      <button class="btn btn--neutral" id="manage-btn">単語を管理</button>
+    </div>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <p>TOEIC 990 Trainer &copy; 2026</p>
+  </footer>
+
+  <!-- JS読み込み -->
+  <script src="js/storage.js"></script>
+  <script src="js/home.js"></script>
+
+</body>
+</html>
