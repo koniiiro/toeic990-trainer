@@ -1,0 +1,204 @@
+/* ===================================
+   TOEIC 990 Trainer — style.css
+   =================================== */
+
+/* --- CSS変数（カラーパレット） --- */
+:root {
+  --color-primary:    #534AB7;
+  --color-primary-lt: #EEEDFE;
+  --color-success:    #2D7A3A;
+  --color-success-lt: #EAF3DE;
+  --color-danger:     #C0392B;
+  --color-danger-lt:  #FCEBEB;
+  --color-warning-lt: #FAEEDA;
+  --color-warning:    #633806;
+  --color-text:       #1A1A1A;
+  --color-text-sub:   #666666;
+  --color-text-muted: #AAAAAA;
+  --color-border:     #E5E5E5;
+  --color-bg:         #F7F7F5;
+  --color-bg-card:    #FFFFFF;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* --- リセット --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- ヘッダー --- */
+.header {
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 1.25rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.header__settings {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-text-sub);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.header__settings:hover {
+  background: var(--color-bg);
+}
+
+/* --- メイン --- */
+.main {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- 進捗サマリー --- */
+.stats {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  divide: row;
+}
+
+.stats__item {
+  flex: 1;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+}
+
+.stats__item:last-child {
+  border-right: none;
+}
+
+.stats__num {
+  display: block;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.stats__label {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+
+/* --- ステータスバッジ --- */
+.status-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.badge--new      { background: #E6F1FB; color: #0C447C; }
+.badge--learning { background: var(--color-warning-lt); color: var(--color-warning); }
+.badge--mastered { background: var(--color-success-lt); color: var(--color-success); }
+
+/* --- アクションボタン --- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+  opacity: 0.85;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+}
+
+.btn--neutral {
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn--neutral:hover {
+  background: var(--color-bg);
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.btn--success {
+  background: var(--color-success);
+  color: #fff;
+}
+
+/* --- フッター --- */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
