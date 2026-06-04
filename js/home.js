@@ -1,7 +1,18 @@
 // home.js
 // ホーム画面の表示処理
 
-document.addEventListener('DOMContentLoaded', () => {
+// 初回起動時にsample_words.jsonをlocalStorageに読み込む
+async function loadInitialData() {
+  if (getWords().length === 0) {
+    const res   = await fetch('data/sample_words.json');
+    const words = await res.json();
+    saveWords(words);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async() => {
+
+  await loadInitialData(); 
 
   // 日付が変わっていたら進捗をリセット
   resetProgressIfNewDay();

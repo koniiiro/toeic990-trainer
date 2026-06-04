@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習 — TOEIC 990 Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <button class="header__back" id="back-btn" aria-label="ホームへ戻る">←</button>
+    <span class="header__progress" id="progress-text">1 / 20</span>
+    <button class="header__settings" aria-label="設定">···</button>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- プログレスバー -->
+    <div class="progress-bar" aria-label="学習進捗">
+      <div class="progress-bar__fill" id="progress-fill"></div>
+    </div>
+
+    <!-- フリップカード -->
+    <div class="card-wrap">
+      <div class="card" id="card">
+        <!-- 表面：単語 -->
+        <div class="card__front">
+          <span class="card__pos" id="card-pos">v.</span>
+          <p class="card__word" id="card-word">allocate</p>
+          <button class="card__speak" id="speak-btn" aria-label="発音を聞く">🔊</button>
+          <p class="card__hint">タップして意味を確認</p>
+        </div>
+        <!-- 裏面：意味・例文 -->
+        <div class="card__back">
+          <p class="card__meaning" id="card-meaning">〜を割り当てる、配分する</p>
+          <p class="card__example" id="card-example">The budget was allocated to three departments.</p>
+          <p class="card__example-ja" id="card-example-ja">予算は3つの部署に配分された。</p>
+          <button class="card__speak card__speak--back" id="speak-btn-back" aria-label="発音を聞く">🔊</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 仕分けボタン -->
+    <div class="judge-buttons" id="judge-buttons">
+      <button class="btn btn--danger" id="miss-btn">↩ もう一度</button>
+      <button class="btn btn--success" id="correct-btn">✓ 覚えた！</button>
+    </div>
+
+  </main>
+
+  <!-- JS読み込み -->
+  <script src="js/storage.js"></script>
+  <script src="js/study.js"></script>
+
+</body>
+</html>
