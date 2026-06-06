@@ -335,3 +335,39 @@ body {
 .judge-buttons .btn {
   flex: 1;
 }
+
+
+/* ===================================
+   セッション完了画面（result.html）
+   =================================== */
+
+/* --- スコア表示 --- */
+.result-score {
+  text-align: center;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem 1rem;
+}
+
+.result-score__num {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.result-score__label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+/* --- メッセージ --- */
+.result-message {
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-text-sub);
+  padding: 0.5rem 0;
+  line-height: 1.6;
+}

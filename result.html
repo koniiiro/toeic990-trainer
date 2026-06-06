@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>結果 — TOEIC 990 Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <span class="header__title">セッション完了</span>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- スコア -->
+    <section class="result-score" aria-label="正解率">
+      <p class="result-score__num" id="score-percent">0%</p>
+      <p class="result-score__label">正解率</p>
+    </section>
+
+    <!-- 統計 -->
+    <section class="stats" aria-label="セッション結果">
+      <div class="stats__item">
+        <span class="stats__num" id="result-studied">0</span>
+        <span class="stats__label">学習枚数</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num" id="result-correct">0</span>
+        <span class="stats__label">覚えた</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num" id="result-miss">0</span>
+        <span class="stats__label">苦手</span>
+      </div>
+    </section>
+
+    <!-- メッセージ -->
+    <p class="result-message" id="result-message"></p>
+
+    <!-- アクションボタン -->
+    <div class="actions">
+      <button class="btn btn--danger" id="retry-btn">苦手のみもう一度</button>
+      <button class="btn btn--primary" id="home-btn">ホームへ戻る</button>
+    </div>
+
+  </main>
+
+  <!-- JS読み込み -->
+  <script src="js/storage.js"></script>
+  <script src="js/result.js"></script>
+
+</body>
+</html>
