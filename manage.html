@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>単語管理 — TOEIC 990 Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <button class="header__back" id="back-btn" aria-label="ホームへ戻る">←</button>
+    <span class="header__title">単語を管理</span>
+    <button class="btn-add" id="add-btn" aria-label="単語を追加">＋ 追加</button>
+  </header>
+
+  <!-- 検索・フィルター -->
+  <div class="search-bar">
+    <input
+      type="text"
+      class="search-bar__input"
+      id="search-input"
+      placeholder="🔍 単語・意味で検索"
+    >
+    <select class="search-bar__select" id="category-filter">
+      <option value="">すべてのカテゴリ</option>
+      <option value="Part7">Part7</option>
+      <option value="金の読解">金の読解</option>
+      <option value="言い換え">言い換え</option>
+    </select>
+  </div>
+
+  <!-- 単語一覧 -->
+  <main class="main">
+    <ul class="word-list" id="word-list">
+      <!-- JS で動的に生成 -->
+    </ul>
+  </main>
+
+  <!-- 追加・編集フォーム（初期は非表示） -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h2 class="modal__title" id="modal-title">単語を追加</h2>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-word">英単語・熟語 *</label>
+        <input type="text" class="modal__input" id="input-word" placeholder="例: allocate">
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-pos">品詞 *</label>
+        <select class="modal__input" id="input-pos">
+          <option value="v.">v.（動詞）</option>
+          <option value="n.">n.（名詞）</option>
+          <option value="adj.">adj.（形容詞）</option>
+          <option value="adv.">adv.（副詞）</option>
+          <option value="phrase">phrase（熟語）</option>
+          <option value="conj.">conj.（接続詞）</option>
+        </select>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-meaning">日本語の意味 *</label>
+        <input type="text" class="modal__input" id="input-meaning" placeholder="例: 〜を割り当てる">
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-example">英語例文</label>
+        <textarea class="modal__input modal__textarea" id="input-example" placeholder="例: The budget was allocated to three departments."></textarea>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-example-ja">例文の日本語訳</label>
+        <textarea class="modal__input modal__textarea" id="input-example-ja" placeholder="例: 予算は3つの部署に配分された。"></textarea>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="input-category">カテゴリ</label>
+        <input type="text" class="modal__input" id="input-category" placeholder="例: Part7, 金の読解, 言い換え">
+      </div>
+
+      <div class="modal__actions">
+        <button class="btn btn--neutral" id="cancel-btn">キャンセル</button>
+        <button class="btn btn--primary" id="save-btn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS読み込み -->
+  <script src="js/storage.js"></script>
+  <script src="js/manage.js"></script>
+
+</body>
+</html>
+
