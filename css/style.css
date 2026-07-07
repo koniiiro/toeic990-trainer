@@ -4,29 +4,31 @@
 
 /* --- CSS変数（カラーパレット） --- */
 :root {
-  --color-primary:    #534AB7;
+  --color-primary: #534AB7;
   --color-primary-lt: #EEEDFE;
-  --color-success:    #2D7A3A;
+  --color-success: #2D7A3A;
   --color-success-lt: #EAF3DE;
-  --color-danger:     #C0392B;
-  --color-danger-lt:  #FCEBEB;
+  --color-danger: #C0392B;
+  --color-danger-lt: #FCEBEB;
   --color-warning-lt: #FAEEDA;
-  --color-warning:    #633806;
-  --color-text:       #1A1A1A;
-  --color-text-sub:   #666666;
+  --color-warning: #633806;
+  --color-text: #1A1A1A;
+  --color-text-sub: #666666;
   --color-text-muted: #AAAAAA;
-  --color-border:     #E5E5E5;
-  --color-bg:         #F7F7F5;
-  --color-bg-card:    #FFFFFF;
-  --radius-sm:  6px;
-  --radius-md:  10px;
-  --radius-lg:  16px;
-  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+  --color-border: #E5E5E5;
+  --color-bg: #F7F7F5;
+  --color-bg-card: #FFFFFF;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
 }
 
 /* --- リセット --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -81,7 +83,7 @@ body {
 .main {
   flex: 1;
   padding: 1.5rem 1.25rem;
-  max-width: 480px;
+  max-width: 740px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -138,9 +140,20 @@ body {
   border-radius: 999px;
 }
 
-.badge--new      { background: #E6F1FB; color: #0C447C; }
-.badge--learning { background: var(--color-warning-lt); color: var(--color-warning); }
-.badge--mastered { background: var(--color-success-lt); color: var(--color-success); }
+.badge--new {
+  background: #E6F1FB;
+  color: #0C447C;
+}
+
+.badge--learning {
+  background: var(--color-warning-lt);
+  color: var(--color-warning);
+}
+
+.badge--mastered {
+  background: var(--color-success-lt);
+  color: var(--color-success);
+}
 
 /* --- アクションボタン --- */
 .actions {
@@ -239,6 +252,11 @@ body {
   transition: transform 0.45s ease;
   cursor: pointer;
   border-radius: var(--radius-lg);
+  transition: transform 0.45s ease, box-shadow 0.15s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .card.is-flipped {
@@ -286,29 +304,45 @@ body {
 
 .card__hint {
   font-size: 12px;
-  color: var(--color-text-muted);
-  margin-top: 0.5rem;
+  color: var(--color-primary);
+  margin-top: 0.75rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  padding: 5px 16px;
+  background: var(--color-primary-lt);
+  transition: background 0.15s, color 0.15s;
+}
+
+.card:hover .card__hint {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 .card__meaning {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--color-primary);
   text-align: center;
 }
 
 .card__example {
-  font-size: 13px;
+  font-size: 18px;
   color: var(--color-text);
   text-align: center;
   line-height: 1.6;
 }
 
 .card__example-ja {
-  font-size: 12px;
+  font-size: 17px;
   color: var(--color-text-sub);
   text-align: center;
   line-height: 1.6;
+}
+
+/* --- 例文ハイライト --- */
+.highlight {
+  color: #e8511ad4;
+  font-weight: 600;
 }
 
 /* --- 発音ボタン --- */
@@ -501,7 +535,7 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 200;
   align-items: center;
   justify-content: center;

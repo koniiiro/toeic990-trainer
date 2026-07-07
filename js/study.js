@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('speak-btn-back').addEventListener('click', (e) => {
     e.stopPropagation();
-    speakWord(session[current].word);
+    speakWord(session[current].example);
   });
 
   // 仕分けボタン
   document.getElementById('correct-btn').addEventListener('click', () => handleJudge(true));
-  document.getElementById('miss-btn').addEventListener('click', ()    => handleJudge(false));
+  document.getElementById('miss-btn').addEventListener('click', () => handleJudge(false));
 
   // ホームへ戻る
   document.getElementById('back-btn').addEventListener('click', () => {
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // キーボード操作
   document.addEventListener('keydown', (e) => {
-    if (e.key === ' ')           flipCard();
-    if (e.key === 'ArrowRight')  handleJudge(true);
-    if (e.key === 'ArrowLeft')   handleJudge(false);
+    if (e.key === ' ') flipCard();
+    if (e.key === 'ArrowRight') handleJudge(true);
+    if (e.key === 'ArrowLeft') handleJudge(false);
   });
 
 });
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ───────────────────────────────
 
 function buildSession() {
-  const words    = getWords();
+  const words = getWords();
   const settings = getSettings();
 
   // masteredを除外
@@ -83,10 +83,10 @@ function buildSession() {
 function showCard(index) {
   const word = session[index];
 
-  document.getElementById('card-pos').textContent        = word.pos;
-  document.getElementById('card-word').textContent       = word.word;
-  document.getElementById('card-meaning').textContent    = word.meaning;
-  document.getElementById('card-example').textContent    = word.example;
+  document.getElementById('card-pos').textContent = word.pos;
+  document.getElementById('card-word').textContent = word.word;
+  document.getElementById('card-meaning').textContent = word.meaning;
+  document.getElementById('card-example').innerHTML = highlightWord(word.example, word.word);
   document.getElementById('card-example-ja').textContent = word.example_ja;
 
   // カードをリセット（表面に戻す）
@@ -153,9 +153,20 @@ function handleJudge(isCorrect) {
 // ───────────────────────────────
 
 function updateProgress() {
-  const total   = session.length;
+  const total = session.length;
   const percent = Math.round((current / total) * 100);
 
   document.getElementById('progress-text').textContent = `${current + 1} / ${total}`;
   document.getElementById('progress-fill').style.width = `${percent}%`;
+}
+
+// ───────────────────────────────
+// 例文内の単語をハイライト
+// ───────────────────────────────
+
+function highlightWord(example, word) {
+  if (!example || !word) return example;
+  // 大文字小文字を区別せずに該当単語を検索して色付け
+  const regex = new RegExp(`(${word})`, 'gi');
+  return example.replace(regex, '<span class="highlight">$1</span>');
 }
