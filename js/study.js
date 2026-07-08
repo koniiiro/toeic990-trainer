@@ -61,20 +61,48 @@ document.addEventListener('DOMContentLoaded', () => {
 function buildSession() {
   const words = getWords();
   const settings = getSettings();
+  const goal = settings.daily_goal;
 
   // masteredを除外
   let candidates = words.filter(w => w.status !== 'mastered');
 
-  // 優先度スコアで並べ替え（低いほど優先）
-  candidates.sort((a, b) => {
-    const scoreA = a.correct_count - (a.miss_count * 2);
-    const scoreB = b.correct_count - (b.miss_count * 2);
-    return scoreA - scoreB;
-  });
+  // 本日出題済みのIDを取得
+  const progress = getProgress();
+  const studiedIds = progress.session_ids || [];
 
-  // 目標枚数だけ取り出す
-  return candidates.slice(0, settings.daily_goal);
+  // 未出題と出題済みに分類
+  const notStudied = candidates.filter(w => !studiedIds.includes(w.id));
+  const studied = candidates.filter(w => studiedIds.includes(w.id));
+
+  // 学習中（learning）を優先、newはシャッフル
+  function sortAndShuffle(list) {
+    const learning = list.filter(w => w.status === 'learning');
+    const newWords = list.filter(w => w.status === 'new');
+
+    learning.sort((a, b) => {
+      const scoreA = a.correct_count - (a.miss_count * 2);
+      const scoreB = b.correct_count - (b.miss_count * 2);
+      return scoreA - scoreB;
+    });
+
+    // newをシャッフル
+    for (let i = newWords.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newWords[i], newWords[j]] = [newWords[j], newWords[i]];
+    }
+
+    return [...learning, ...newWords];
+  }
+
+  // 未出題を優先、足りなければ出題済みで補う
+  const sortedNotStudied = sortAndShuffle(notStudied);
+  const sortedStudied = sortAndShuffle(studied);
+  const combined = [...sortedNotStudied, ...sortedStudied].slice(0, goal);
+
+  return combined;
 }
+
+
 
 // ───────────────────────────────
 // カード表示
@@ -134,6 +162,12 @@ function handleJudge(isCorrect) {
   const progress = getProgress();
   progress.studied += 1;
   if (isCorrect) progress.correct += 1;
+
+  // 出題済みIDを記録
+  if (!progress.session_ids) progress.session_ids = [];
+  if (!progress.session_ids.includes(word.id)) {
+    progress.session_ids.push(word.id);
+  }
   saveProgress(progress);
 
   // 次のカードへ

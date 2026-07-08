@@ -4,19 +4,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const progress = getProgress();
-  const words    = getWords();
+  const words = getWords();
 
   // 正解率を計算
-  const studied  = progress.studied;
-  const correct  = progress.correct;
-  const miss     = studied - correct;
-  const percent  = studied > 0 ? Math.round((correct / studied) * 100) : 0;
+  const studied = progress.studied;
+  const correct = progress.correct;
+  const miss = studied - correct;
+  const percent = studied > 0 ? Math.round((correct / studied) * 100) : 0;
 
   // 数値を表示
-  document.getElementById('score-percent').textContent  = `${percent}%`;
+  document.getElementById('score-percent').textContent = `${percent}%`;
   document.getElementById('result-studied').textContent = studied;
   document.getElementById('result-correct').textContent = correct;
-  document.getElementById('result-miss').textContent    = miss;
+  document.getElementById('result-miss').textContent = miss;
 
   // 正解率に応じたメッセージ
   const message = getResultMessage(percent);
@@ -41,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'index.html';
   });
 
+  // 次のセッションへ
+  document.getElementById('next-btn').addEventListener('click', () => {
+    // 本日の進捗をリセットせず、そのまま学習画面へ
+    localStorage.removeItem('toeic_retry_mode');
+    window.location.href = 'study.html';
+  });
+
 });
 
 // ───────────────────────────────
@@ -49,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getResultMessage(percent) {
   if (percent === 100) return '🎉 パーフェクト！素晴らしいです！';
-  if (percent >= 80)  return '✨ よくできました！この調子で続けましょう！';
-  if (percent >= 60)  return '👍 いい感じです！苦手単語を復習しましょう。';
+  if (percent >= 80) return '✨ よくできました！この調子で続けましょう！';
+  if (percent >= 60) return '👍 いい感じです！苦手単語を復習しましょう。';
   return '💪 もう一度苦手単語に挑戦しましょう！';
 }
